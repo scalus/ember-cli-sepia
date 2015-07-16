@@ -1,6 +1,14 @@
 /* jshint node: true */
 'use strict';
+var commands = require('./lib/commands');
 
-module.exports = {
-  name: 'ember-cli-sepia'
-};
+function SepiaProxy() {
+  this.name = 'ember-cli-sepia';
+  return this;
+}
+
+SepiaProxy.prototype.includedCommands = function() {
+  return commands;
+}
+
+module.exports = SepiaProxy;
