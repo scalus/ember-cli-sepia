@@ -1,24 +1,34 @@
-# Ember-cli-sepia
+ember-cli-sepia
+================================================================================
 
-This README outlines the details of collaborating on this Ember addon.
+### WARNING: alpha - do not use this
 
-## Installation
+Not only is it alpha, but likely won't work for anyone but our own app for now.
+Feel free to hack and contribute.
+
+Installation
+--------------------------------------------------------------------------------
 
 * `git clone` this repository
 * `npm install`
 * `bower install`
 
-## Running
+#### Note: probably none of the commands below work for development at the moment
+
+Running
+--------------------------------------------------------------------------------
 
 * `ember server`
 * Visit your app at http://localhost:4200.
 
-## Running Tests
+Running Tests
+--------------------------------------------------------------------------------
 
 * `ember test`
 * `ember test --server`
 
-## Building
+Building
+--------------------------------------------------------------------------------
 
 * `ember build`
 
