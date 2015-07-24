@@ -4,11 +4,14 @@ var SepiaTestemMiddleware = require('./lib/middleware/sepia-testem');
 var commands = require('./lib/commands');
 
 var VALID_VCR_MODES = ['playback', 'cache', 'record'];
-var VCR_MODE        = process.env.VCR_MODE;
 
-var validVCRMode = VALID_VCR_MODES.some(function(mode) {
-  return VCR_MODE.toLowerCase() === mode
-});
+function isValidVCRMode() {
+  if(!process.env.VCR_MODE) { return false; }
+  var VCR_MODE = process.env.VCR_MODE.toLowerCase();
+  return VALID_VCR_MODES.some(function(mode) {
+    return VCR_MODE.toLowerCase() === mode
+  });
+}
 
 function EmberCLISepia() {
   this.name = 'ember-cli-sepia';
@@ -20,8 +23,8 @@ EmberCLISepia.prototype.includedCommands = function() {
 };
 
 EmberCLISepia.prototype.testemMiddleware = function(app) {
+  if(!isValidVCRMode() || process.argv.indexOf('test') < 0) { return; }
   var sepiaTestem = new SepiaTestemMiddleware();
-  if(!validVCRMode || process.argv.indexOf('sepia:test') < 0) { return; }
   sepiaTestem.useTestemMiddleware(app);
 };
 
