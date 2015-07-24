@@ -25,7 +25,7 @@ EmberCLISepia.prototype.includedCommands = function() {
 EmberCLISepia.prototype.testemMiddleware = function(app) {
   if(!isValidVCRMode() || process.argv.indexOf('test') < 0) { return; }
   var sepiaTestem = new SepiaTestemMiddleware();
-  sepiaTestem.useTestemMiddleware(app);
+  sepiaTestem.attachMiddlewareTo(app);
 };
 
 module.exports = EmberCLISepia;

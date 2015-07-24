@@ -1,3 +1,4 @@
+// #TODO(CLI): this will need to change to ember-cli-build file when upgrading CLI
 /* jshint node: true */
 /* global require, module */
 
