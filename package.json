@@ -9,9 +9,10 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember try:testall"
+    "test": "node node_modules/mocha/bin/mocha node-tests/**/*-test.js",
+    "autotest": "node node_modules/mocha/bin/mocha --watch --reporter spec node-tests/**/*-test.js"
   },
-  "repository": "",
+  "repository": "https://github.com/backopsco/ember-cli-sepia",
   "engines": {
     "node": ">= 0.12.0"
   },
@@ -19,6 +20,8 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
+    "chai": "^3.2.0",
+    "chai-as-promised": "^5.1.0",
     "ember-cli": "backopsco/ember-cli#09ac0200b5f62a681292b1ca7d065163a300a38c",
     "ember-cli-app-version": "0.4.0",
     "ember-cli-content-security-policy": "0.4.0",
@@ -34,7 +37,10 @@
     "ember-disable-prototype-extensions": "^1.0.0",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.2",
-    "ember-try": "0.0.6"
+    "ember-try": "0.0.6",
+    "mocha": "^2.2.5",
+    "sinon": "^1.15.4",
+    "sinon-chai": "^2.8.0"
   },
   "keywords": [
     "ember-addon",
