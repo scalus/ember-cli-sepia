@@ -1,10 +1,46 @@
 var chai        = require('chai');
 var sinon       = require('sinon');
-var sinonChai   = require("sinon-chai");
+var sinonChai   = require('sinon-chai');
 var MockProcess = require('../helpers/mock-process');
 var SubprocessFactory = require('../../lib/models/subprocess-factory');
 var expect = chai.expect;
 chai.use(sinonChai);
+
+var switches = {
+  attack:     '--attack',
+  weapon:     '--weapon',
+  fighter:    '--fighter',
+  powerLevel: '--power-level',
+  finalSmash: '--final-smash'
+};
+
+var values = {
+  attack:     'Falcon Punch',
+  weapon:     'sword',
+  fighter:    'Captain Falcon',
+  powerLevel: 'over 9000',
+  finalSmash: 'hit someone with my race car'
+};
+
+var validCommands = ['fighter', 'attack', 'finalSmash'];
+
+function expectSwitchAndValue(resultArray, property) {
+  var expectedSwitch = switches[property];
+  var expectedValue  = values[property];
+  var valueIndex = resultArray.indexOf(expectedSwitch) + 1;
+  var value      = resultArray[valueIndex]
+  expect(resultArray).to.contain(expectedSwitch);
+  expect(value).to.equal(expectedValue);
+}
+
+function dontExpectSwitchAndValue(resultArray, property) {
+  var expectedSwitch = switches[property];
+  var expectedValue  = values[property];
+  var valueIndex = resultArray.indexOf(expectedSwitch) + 1;
+  var value      = resultArray[valueIndex]
+  expect(resultArray).to.not.contain(expectedSwitch);
+  expect(resultArray).to.not.contain(expectedValue);
+}
 
 describe('SubprocessFactory', function() {
   var subprocessfactory;
@@ -37,53 +73,76 @@ describe('SubprocessFactory', function() {
     });
   });
 
-  describe.skip('#spawn', function() {
-    // mock out _generateProcess to return mock process
-    describe('with commandOptions', function() {
+  describe('#spawn', function() {
+    var commandOptions = {
+      fighter: values.fighter,
+      powerLevel: values.powerLevel
+    };
 
+    beforeEach(function() {
+      subprocessfactory = new SubprocessFactory({
+        command: 'smash',
+        title:   'Super Smash Bros',
+        validCommandOptions: validCommands,
+        processOptions: {
+          attack: values.attack,
+          weapon: values.weapon
+        }
+      });
+      sinon.stub(subprocessfactory, '_generateProcess', function(args, options) {
+        return new MockProcess({
+          command: this.command,
+          args: args,
+          options: options
+        });
+      });
+    });
+
+    afterEach(function() {
+      subprocessfactory._generateProcess.restore()
+    });
+
+    describe('with commandOptions', function() {
+      var process;
+
+      beforeEach(function() {
+        process = subprocessfactory.spawn(commandOptions);
+      });
+
+      it('assigns title to process', function() {
+        expect(process.title).to.equal(subprocessfactory.title)
+      });
+
+      it('spawns a process with arguments based on processOptions and commandOptions', function() {
+        expect(subprocessfactory._generateProcess).to.have.been.called
+        expectSwitchAndValue(process.args, 'attack');
+        expectSwitchAndValue(process.args, 'fighter');
+        dontExpectSwitchAndValue(process.args, 'powerLevel');
+        dontExpectSwitchAndValue(process.args, 'weapon');
+      });
     });
 
     describe('without commandOptions', function() {
+      var process;
 
+      beforeEach(function() {
+        process = subprocessfactory.spawn({});
+      });
+
+      it('assigns title to process', function() {
+        expect(process.title).to.equal(subprocessfactory.title)
+      });
+
+      it('spawns a process arguments based on processOptions', function() {
+        expect(subprocessfactory._generateProcess).to.have.been.called
+        expectSwitchAndValue(process.args, 'attack');
+        dontExpectSwitchAndValue(process.args, 'weapon');
+        dontExpectSwitchAndValue(process.args, 'fighter');
+      });
     });
   });
 
   describe('#normalizeArgs', function() {
-    var switches = {
-      attack:     '--attack',
-      weapon:     '--weapon',
-      fighter:    '--fighter',
-      powerLevel: '--power-level',
-      finalSmash: '--final-smash'
-    };
-
-    var values = {
-      attack:     'Falcon Punch',
-      weapon:     'sword',
-      fighter:    'Captain Falcon',
-      powerLevel: 'over 9000',
-      finalSmash: 'hit someone with my race car'
-    };
-
-    var validCommands = ['fighter', 'attack', 'finalSmash'];
-
-    function expectSwitchAndValue(resultArray, property) {
-      var expectedSwitch = switches[property];
-      var expectedValue  = values[property];
-      var valueIndex = resultArray.indexOf(expectedSwitch) + 1;
-      var value      = resultArray[valueIndex]
-      expect(resultArray).to.contain(expectedSwitch);
-      expect(value).to.equal(expectedValue);
-    }
-
-    function dontExpectSwitchAndValue(resultArray, property) {
-      var expectedSwitch = switches[property];
-      var expectedValue  = values[property];
-      var valueIndex = resultArray.indexOf(expectedSwitch) + 1;
-      var value      = resultArray[valueIndex]
-      expect(resultArray).to.not.contain(expectedSwitch);
-      expect(resultArray).to.not.contain(expectedValue);
-    }
 
     describe('with passed in processOptions and CLI options', function() {
       var result;
