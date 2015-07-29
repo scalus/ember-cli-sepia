@@ -52,7 +52,6 @@ describe('ConfigurationManager', function() {
     describe('with a config file in the assumed path of defaultConfigPath', function() {
       var fixturePath = 'these/are/not/the/fixtures/you/are/looking/for';
 
-
       beforeEach(function() {
         // mock the user config
         ConfigurationManager.prototype.defaultConfigPath = fakeDefaultUserPath;
@@ -84,15 +83,26 @@ describe('ConfigurationManager', function() {
         expect(configManager.get('emberCLI.environment')).to.equal('test');
       });
     });
-    // describe('with command line options');
   });
 
-  // describe('#get', function() {
-  //
-  // });
-  //
-  //
-  // describe('#set', function() {
-  //
-  // });
+  describe('#get', function() {
+    it('should get value out of this._config', function() {
+      configManager = new ConfigurationManager
+      var path  = 'testValue';
+      var value = 100;
+      configManager._config[path] = value
+      expect(configManager.get(path)).to.equal(value);
+    });
+  });
+
+  describe('#set', function() {
+    it('should set values on this._config', function() {
+      configManager = new ConfigurationManager
+      var path  = 'testValue';
+      var value = 100;
+      configManager.set(path, value)
+      expect(configManager._config[path]).to.equal(value);
+      expect(configManager.get(path)).to.equal(value);
+    });
+  });
 });

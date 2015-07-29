@@ -14,7 +14,7 @@ var EmberCLISepia = CoreObject.extend({
   },
 
   testemMiddleware: function(app) {
-    if(!isValidVCRMode(process.env.VCR_MODE) || process.argv.indexOf('test') < 0) { return; }
+    if(!isValidVCRMode(process.env.VCR_MODE) || process.argv.indexOf('sepia:test') < 0) { return; }
     var sepiaTestem = new SepiaTestemMiddleware();
     sepiaTestem.attachMiddlewareTo(app);
   }
