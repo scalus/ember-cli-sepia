@@ -1,8 +1,8 @@
 module.exports = {
-  "emberCLI": {
-    "port": 60000
+  "main": {
+    "port": 20000
   },
   "sepia": {
     "fixtures": 'fixture/all/the/things'
   }
-}
+};
