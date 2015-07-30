@@ -10,17 +10,13 @@ module.exports = {
 
   "sepia": {
     "port": process.env.SEPIA_PORT || 5000,
-    "fixtures": "scalus/sepia-fixtures",
+    "fixtures": "sepia-fixtures",
     "sepiaOptions": {
       "verbose": false,
       "debug":   false,
       "includeHeaderNames": false,
       "includeCookieNames": false,
-      "filters": [{
-        urlFilter: function(url) {
-          return url.replace(/localhost/, 'lvh.me');
-        }
-      }]
+      "filters": []
     },
     "proxyOptions": {
       "ws": true,
