@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-sepia",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Sepia.js For Ember Apps",
   "directories": {
     "doc": "doc",
@@ -16,13 +16,14 @@
   "engines": {
     "node": ">= 0.12.0"
   },
-  "author": "",
+  "contributors": [
+    "Bryan Mason Robles <bryanaka0@gmail.com> (http://bryanrobl.es)"
+  ],
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
     "chai": "^3.2.0",
     "chai-as-promised": "^5.1.0",
-    "ember-cli": "backopsco/ember-cli#09ac0200b5f62a681292b1ca7d065163a300a38c",
     "ember-cli-app-version": "0.4.0",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "^1.0.0",
@@ -47,6 +48,7 @@
     "proxy"
   ],
   "dependencies": {
+    "ember-cli": ">=0.2.3",
     "chalk": "^1.1.0",
     "core-object": "^1.1.0",
     "ember-cli-babel": "^5.0.0",
