@@ -71,8 +71,8 @@ describe('ConfigurationManager', function() {
       });
 
       it('preserves systemConfig as defaults', function() {
-        var port = systemConfig['emberCLI']['port'];
-        expect(configManager.get('emberCLI.port')).to.equal(port);
+        var port = systemConfig['sepia']['port'];
+        expect(configManager.get('sepia.port')).to.equal(port);
       });
 
       it('assigns command line options highest precedence', function() {

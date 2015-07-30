@@ -1,16 +1,11 @@
 module.exports = {
   "main": {
-    "port": process.env.PORT || 3000,
+    "port": process.env.MAIN_PORT || 3000,
     "proxyOptions": {
       "ws": true,
       "changeOrigin": true,
       "autoRewrite":  true
     }
-  },
-  // supports all ember CLI options
-  // should be camelCased
-  "emberCLI": {
-    "port": process.env.EMBER_PORT || 4200
   },
 
   "sepia": {
