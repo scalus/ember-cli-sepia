@@ -9,8 +9,8 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "node node_modules/mocha/bin/mocha node-tests/**/*-test.js",
-    "autotest": "node node_modules/mocha/bin/mocha --watch --reporter spec node-tests/**/*-test.js"
+    "test": "SUPERVISOR_LOG_LEVEL=error node node_modules/mocha/bin/mocha node-tests/**/*-test.js",
+    "autotest": "SUPERVISOR_LOG_LEVEL=error node node_modules/mocha/bin/mocha --watch --reporter spec node-tests/**/*-test.js"
   },
   "repository": "https://github.com/backopsco/ember-cli-sepia",
   "engines": {
