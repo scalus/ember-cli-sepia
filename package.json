@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-sepia",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Sepia.js For Ember Apps",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -9,17 +9,20 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember try:testall"
+    "test": "SUPERVISOR_LOG_LEVEL=error node node_modules/mocha/bin/mocha node-tests/**/*-test.js",
+    "autotest": "SUPERVISOR_LOG_LEVEL=error node node_modules/mocha/bin/mocha --watch --reporter spec node-tests/**/*-test.js"
   },
-  "repository": "",
+  "repository": "https://github.com/backopsco/ember-cli-sepia",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 0.12.0"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
-    "ember-cli": "1.13.1",
+    "chai": "^3.2.0",
+    "chai-as-promised": "^5.1.0",
+    "ember-cli": "backopsco/ember-cli#09ac0200b5f62a681292b1ca7d065163a300a38c",
     "ember-cli-app-version": "0.4.0",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "^1.0.0",
@@ -31,16 +34,27 @@
     "ember-cli-release": "0.2.3",
     "ember-cli-uglify": "^1.0.1",
     "ember-data": "1.13.5",
+    "ember-disable-prototype-extensions": "^1.0.0",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.2",
-    "ember-disable-prototype-extensions": "^1.0.0",
-    "ember-try": "0.0.6"
+    "ember-try": "0.0.6",
+    "mocha": "^2.2.5",
+    "sinon": "^1.15.4",
+    "sinon-chai": "^2.8.0"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "proxy"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.0.0"
+    "chalk": "^1.1.0",
+    "core-object": "^1.1.0",
+    "ember-cli-babel": "^5.0.0",
+    "http-proxy": "^1.11.1",
+    "lodash": "^3.10.0",
+    "nopt": "^3.0.3",
+    "rsvp": "^3.0.18",
+    "sepia": "^2.0.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
