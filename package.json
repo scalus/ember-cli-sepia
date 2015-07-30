@@ -47,6 +47,7 @@
     "proxy"
   ],
   "dependencies": {
+    "chalk": "^1.1.0",
     "core-object": "^1.1.0",
     "ember-cli-babel": "^5.0.0",
     "http-proxy": "^1.11.1",
