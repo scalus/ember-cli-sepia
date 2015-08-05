@@ -38,7 +38,7 @@ respond with a recorded request.
 
 Here is a rough diagram of how it works:
 
-![Sepia Serve Diagram](https://raw.github.com/backopsco/ember-cli-sepia/master/assets/sepia-serve-edited.jpg)
+![Sepia Serve Diagram](https://raw.githubusercontent.com/backopsco/ember-cli-sepia/master/assets/sepia-serve-edited.jpg?token=ACHuLDiuPqDIwN0-hboFM63ZOlfj7NuJks5Vy636wA%3D%3D)
 
 #### Options
 
