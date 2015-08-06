@@ -22,6 +22,15 @@ sepia. Then they delegate to their respective vanilla ember command like
 
 ### `ember sepia:serve`
 
+This starts the ember cli server with sepia running as well. This is useful for
+developing while running integration tests to check for regressions. You will
+likely use this less often than `ember sepia:test`.
+
+Beware that running plain `ember serve` will cause integration test requests to
+passthrough to the API server.
+
+#### details
+
 This starts up several processes, including:
 
 * Master Proxy (entry point into your app)
@@ -31,7 +40,7 @@ This starts up several processes, including:
 Your main entry point will be Master Proxy, which is in charge of routing HTTP
 Requests to either the Ember CLI Server or the Sepia Server.
 
-When developing, use the Master Proxy server as the entry point to using your app.
+When developing with `ember sepia:serve`, use the Master Proxy server as the entry point to using your app.
 
 From there, Sepia Proxy will decide whether to proxy to your API servers or
 respond with a recorded request.
@@ -45,7 +54,8 @@ Here is a rough diagram of how it works:
 Supports all options of `ember serve`
 
 ##### `--main-port` (Number)
-Aliases: `--mp`
+Aliases: `--mp`  
+Default: 3000  
 
 Main Port to use as the entry point to your app, and should be used as if you
 used `ember serve --port XXXX`. This is the port the Master Proxy is started on.
@@ -67,15 +77,15 @@ More details on how this configuration file can be used is provided below.
 
 
 ##### `--fixtures` (String)
-Default: `sepia-fixtures`
-
-Sepia Equivalent: `sepia.fixtureDir(<path>)` [See sepia#fixtureDir][sepia-fixtures]
+Default: `sepia-fixtures`  
+Sepia Equivalent: `sepia.fixtureDir(<path>)` [See sepia#fixtureDir][sepia-fixtures]  
 
 Directory where sepia will be storing your fixtures.
 
 
 ##### `--sepia-port` (Number)
-Aliases: `--sp`
+Aliases: `--sp`  
+Default: 5000  
 
 This port is used as the Sepia Proxy port. We will spin up a proxy server that
 will proxy to your default API server if in record or cache mode. If in playback
@@ -93,10 +103,10 @@ matches an api server (right now thats if it matches the regex /api\//)
 Supports all options of `ember test`
 
 ##### `--vcr-mode` (String) {record, cache, playback}
-Default: playback
-Aliases: `--v-rec`: `--vcr-mode=record`, `v-cache`: `--vcr-mode=cache`, `v-play`: `--vcr-mode=playback`
+Aliases: `--v-rec`: `--vcr-mode=record`, `v-cache`: `--vcr-mode=cache`, `v-play`: `--vcr-mode=playback`  
+Default: playback  
 
-Sepia Equivalent: `VCR_MODE` Environment Variable: [See Sepia VCR Mode][sepia-mode]
+Sepia Equivalent: `VCR_MODE` Environment Variable: [See Sepia VCR Mode][sepia-mode]  
 
 
 ##### `--sepia-config-file` (String)
@@ -115,7 +125,8 @@ Sepia Equivalent: `sepia.fixtureDir(<path>)` [See sepia#fixtureDir][sepia-fixtur
 Directory where sepia will be storing your fixtures.
 
 ##### `--sepia-port` (Number)
-Aliases: `--sp`
+Aliases: `--sp`  
+Default: 5000  
 
 This port is used as the Sepia Proxy port. We will spin up a proxy server that
 will proxy to your default API server if in record or cache mode. If in playback
